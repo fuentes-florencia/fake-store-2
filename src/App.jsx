@@ -4,6 +4,7 @@ import { Products } from './components/Products'
 
 function App() {
   const [products, setProducts] = useState([])
+  const [shop, setShop]= useState([])
 
   const getProducts = async ()=>{
     let response = await fetch ("https://fakestoreapi.com/products")
@@ -16,6 +17,10 @@ function App() {
 
   },[])
 
+  const buyProduct = (idProduct)=>{
+    setShop ([...shop,idProduct])
+  }
+
   if(products.length == 0){
     return<>
     <h1>Cargando...</h1>
@@ -26,7 +31,7 @@ function App() {
     <>
     <h1>Fake Store</h1>
     <p>{products[0].title}</p>
-    <Products products={products[19]} />
+    <Products products={products} buyProduct={buyProduct}/>
     </>
   )
 }

@@ -1,8 +1,15 @@
-export const Products = ({products}) => {
+export const Products = ({products, buyProduct}) => {
 
-return <>
-    <h1> Nombre del producto: {products.title} </h1>
-    <h3> Precio  {products.price}</h3>
-    <img src= {products.image} height={200} width={300} alt="" />
-    </>
+return <div className="row">
+    {products.map((element,index)=>{
+        return <div className="col-4" key={index}>
+            <h1>{element.title} </h1>
+            <img src= {element.image} height={200} width={200} alt="" />
+            <h3> Precio: ${element.price}</h3>
+            <button onClick={()=>{buyProduct(element.id)}}>Comprar</button>
+            </div>
+
+    })}
+    
+    </div>
 }
