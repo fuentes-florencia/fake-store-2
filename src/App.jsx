@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { Products } from './components/Products'
+import { Carrito } from './components/Carrito'
 
 function App() {
   const [products, setProducts] = useState([])
   const [shop, setShop]= useState([])
+  const [shopPage, setShopPage]= useState([])
 
   const getProducts = async ()=>{
     let response = await fetch ("https://fakestoreapi.com/products")
@@ -27,13 +29,20 @@ function App() {
     </>
   }
 
+  if (shopPage == false){
+
   return (
     <>
     <h1>Fake Store</h1>
-    <p>{products[0].title}</p>
+    <button disabled={shop.length == 0} onClick={() =>{setShopPage(true)}}>Carrito: {shop.length}</button>
     <Products products={products} buyProduct={buyProduct}/>
     </>
   )
+} else{
+  return<>
+  <Carrito shop={shop} setShopPage={setShopPage} setShop={setShop} />
+  </>
+}
 }
 
 export default App
